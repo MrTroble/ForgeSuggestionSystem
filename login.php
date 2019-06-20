@@ -21,6 +21,8 @@ if($rnt !== false){
     $token = str_replace("access_token=", "", explode("&", $rnt)[0]);
     $exp = time() + 60 * 60 * 24;
     setcookie("token", $token, $exp);
+    echo $rnt;
+    echo explode("&", $rnt)[0];
     echo $token;
     echo $exp;
     $tokens = fopen("token.txt", "a");
