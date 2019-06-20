@@ -15,20 +15,15 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, "client_id=68f267e2a51c384bff92&client_se
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 $rtn = curl_exec($curl);
-if($rnt === false){
+if($rtn === false){
     die();
 }
-var_dump($rtn);
-$rnt = explode("=", $rnt)[1];
-var_dump($rnt);
-$token = explode("&", $rnt)[0];
+$rtn = explode("=", $rtn)[1];
+$token = explode("&", $rtn)[0];
 $exp = time() + 60 * 60 * 24;
 setcookie("token", $token, $exp);
-echo explode("&", $rnt)[0];
-echo $token;
-echo $exp;
 $tokens = fopen("token.txt", "a");
-fwrite("$token, $exp\n");
+fwrite("$token,$exp\n");
 fclose($tokens);
 echo "<h1>DONE! <a href='index.php'>Go back</a></h1>";
 curl_close($curl);
