@@ -15,20 +15,21 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, "client_id=68f267e2a51c384bff92&client_se
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 $rtn = curl_exec($curl);
-curl_close($curl);
-var_dump($rtn);
-if($rnt !== false){
-    $rnt = str_replace("access_token=", "", $rnt);
-    var_dump($rnt);
-    $token = explode("&", $rnt)[0];
-    $exp = time() + 60 * 60 * 24;
-    setcookie("token", $token, $exp);
-    echo explode("&", $rnt)[0];
-    echo $token;
-    echo $exp;
-    $tokens = fopen("token.txt", "a");
-    fwrite("$token, $exp\n");
-    fclose($tokens);
-    echo "<h1>DONE! <a href='index.php'>Go back</a></h1>";
+if($rnt === false){
+    die();
 }
+var_dump($rtn);
+$rnt = str_replace("access_token=", "", $rnt);
+var_dump($rnt);
+$token = explode("&", $rnt)[0];
+$exp = time() + 60 * 60 * 24;
+setcookie("token", $token, $exp);
+echo explode("&", $rnt)[0];
+echo $token;
+echo $exp;
+$tokens = fopen("token.txt", "a");
+fwrite("$token, $exp\n");
+fclose($tokens);
+echo "<h1>DONE! <a href='index.php'>Go back</a></h1>";
+curl_close($curl);
 ?>
