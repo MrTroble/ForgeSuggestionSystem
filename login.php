@@ -19,7 +19,7 @@ if($rnt === false){
     die();
 }
 var_dump($rtn);
-$rnt = str_replace("access_token=", "", $rnt);
+$rnt = explode("=", $rnt)[1];
 var_dump($rnt);
 $token = explode("&", $rnt)[0];
 $exp = time() + 60 * 60 * 24;
