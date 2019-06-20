@@ -22,9 +22,12 @@ $rtn = explode("=", $rtn)[1];
 $token = explode("&", $rtn)[0];
 $exp = time() + 60 * 60 * 24;
 setcookie("token", $token, $exp);
+
 $tokens = fopen("token.txt", "a");
-fwrite("$token,$exp\n");
+fwrite("$token,$exp\n\r");
+fflush($tokens);
 fclose($tokens);
+
 echo "<h1>DONE! <a href='index.php'>Go back</a></h1>";
 curl_close($curl);
 ?>
