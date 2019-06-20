@@ -20,24 +20,52 @@ function readAndPack($name){
 function display($map) {
     $string = "<table>";
     foreach($map as $srg => $name) {
-        $string = $string . "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\" target=''>" . $name . "</a></td>";
+        $string = $string . "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\" target=''>" . $name . "</a></td>\n\r";
     }
     return $string . "</table>";
 }
 
+function loadAll(){
+$GLOBALS["methods"] = readAndPack("methods.csv");
+$GLOBALS["params"] = readAndPack("params.csv");
+$GLOBALS["fields"] = readAndPack("fields.csv");
+}
+
  // Checking for the srg value for not being mallissios
  function checkValidSrg($srg) {
+    loadAll();
     if(isset($GLOBALS["methods"][$srg])) {
-        return;
+        return  $GLOBALS["methods"];
     }
     if(isset($GLOBALS["params"][$srg])) {
-        return;
+        return $GLOBALS["params"];
     }
     if(isset($GLOBALS["fields"][$srg])) {
-        return;
+        return $GLOBALS["fields"];
     }
-    echo("Invalide srg!");
-    exit(403);
+    return false;
+}
+
+ // Gets srgs from a name
+ function getSrgFromName($name) {
+    loadAll();
+    $arr = array();
+    foreach($GLOBALS["methods"] as $srg => $nm){
+        if (strpos($nm, $name) !== false) {
+            $arr[$srg] = $nm;
+        }
+    }
+    foreach($GLOBALS["params"] as $srg => $nm){
+        if (strpos($nm, $name) !== false) {
+            $arr[$srg] = $nm;
+        }
+    }
+    foreach($GLOBALS["fields"] as $srg => $nm){
+        if (strpos($nm, $name) !== false) {
+            $arr[$srg] = $nm;
+        }
+    }
+    return $arr;
 }
 
 function load($pth) {
