@@ -6,7 +6,6 @@ if(!isset($_GET) || !isset($_GET["code"])){
 $code = $_GET["code"];
 $file = fopen("creds.txt", "r");
 $secret = fgets($file);
-$secret2 = fgets($file);
 fclose($file);
 $curl = curl_init();
 
