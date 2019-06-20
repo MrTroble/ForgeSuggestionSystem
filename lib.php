@@ -22,6 +22,7 @@ function checkCookie(){
         return false;
     }
     $file = fopen("token.txt", "r");
+    echo "Check";
     while(($line = fgets($file)) !== false){
         $arr = explode(",", $line);
         echo $line;
