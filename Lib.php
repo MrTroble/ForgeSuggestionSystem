@@ -18,11 +18,11 @@ function readAndPack($name){
 
 // Displays table
 function display($map) {
-    echo "<table>";
+    $string = "<table>";
     foreach($map as $srg => $name) {
-        echo "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\">" . $name . "</a></td>";
+        $string = $string . "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\">" . $name . "</a></td>";
     }
-    echo "</table>";
+    return $string . "</table>";
 }
 
  // Checking for the srg value for not being mallissios

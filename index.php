@@ -12,16 +12,6 @@
         <?php 
         include 'Lib.php';
         
-        if(!isset($GLOBALS["methods"])){
-            $GLOBALS["methods"] = readAndPack("methods.csv");
-        }
-        if(!isset($GLOBALS["params"])){
-            $GLOBALS["params"] = readAndPack("params.csv");
-        }
-        if(!isset($GLOBALS["fields"])){
-            $GLOBALS["fields"] = readAndPack("fields.csv");
-        }
-
         if(isset($_GET) && count($_GET) > 0) {
             if(isset($_GET["srg"])){
                 $srg = $_GET["srg"];
@@ -48,9 +38,7 @@
                 echo "<form method='get'><input type='hidden' name='srg' value='" . $srg . "'><input type='text' name='add'><input type='submit' value='Add'></form>";
             }
         } else {
-            display($GLOBALS["methods"]);
-            display($GLOBALS["params"]);
-            display($GLOBALS["fields"]);
+            echo "<iframe src='cache.html' frameBorder='0' width='100%' height='100%'></iframe>";
         }
         ?>
         </div>
