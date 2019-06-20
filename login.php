@@ -19,7 +19,7 @@ curl_close($curl);
 var_dump($rtn);
 if($rnt !== false){
     $rnt = str_replace("access_token=", "", $rnt);
-    echo $rnt;
+    var_dump($rnt);
     $token = explode("&", $rnt)[0];
     $exp = time() + 60 * 60 * 24;
     setcookie("token", $token, $exp);
