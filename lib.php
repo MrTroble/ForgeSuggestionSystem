@@ -16,6 +16,26 @@ function readAndPack($name){
     return $map;
 }
 
+function checkCookie(){
+    $token = $_COOKIE[token];
+    if(!isset($token)) {
+        return false;
+    }
+    $file = fopen("token.txt", "r");
+    while(($line = fgets($file)) !== false){
+        $arr = explode(",", $line);
+        if($token === $arr[0]){
+            if(time() > (int)$arr[1]){
+                return true;
+            } else {
+                echo "Timestemp expired!";
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
 // Displays table
 function display($map) {
     $string = "<table>";

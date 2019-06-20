@@ -24,9 +24,14 @@
                     $path = "suggestions/" . $srg . ".csv";
                     $map = load($path);
                     if(isset($_GET["add"])){
-                        if(!isset($map[$_GET["add"]])){
-                            $file = fopen($path, "a");
-                            fwrite($file, $_GET["add"] . ", 1\r\n");
+                        if(checkCookie()){
+                            if(!isset($map[$_GET["add"]])){
+                                $file = fopen($path, "a");
+                                fwrite($file, $_GET["add"] . ", 1\r\n");
+                                fclose($file);
+                            }
+                        } else {
+                            echo "Error! Not logged in!";
                         }
                     }
                     $file = false;
