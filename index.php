@@ -10,32 +10,8 @@
         </div>
         <div class="container">
         <?php 
-        // parses csvs and packs them in arrays
-        function readAndPack($name){
-            $map = array();
-            $file = fopen($name, "r");
-            if($file) {
-                fgets($file); // Gets the first line bc not needed
-                while(($line = fgets($file)) !== false){
-                    $arr = explode(",", $line);
-                    $map[$arr[0]] = $arr[1];
-                }
-                fclose($file);
-            } else {
-                echo "Error reading " . $name . "! Contact side owner!";
-            }    
-            return $map;
-        }
-
-        // Displays table
-        function display($map) {
-            echo "<table>";
-            foreach($map as $srg => $name) {
-                echo "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\">" . $name . "</a></td>";
-            }
-            echo "</table>";
-        }
-
+        include 'Lib.php';
+        
         if(!isset($GLOBALS["methods"])){
             $GLOBALS["methods"] = readAndPack("methods.csv");
         }
@@ -46,54 +22,26 @@
             $GLOBALS["fields"] = readAndPack("fields.csv");
         }
 
-        // Checking for the srg value for not being mallissios
-        function checkValidSrg($srg) {
-            if(isset($GLOBALS["methods"][$srg])) {
-                return;
-            }
-            if(isset($GLOBALS["params"][$srg])) {
-                return;
-            }
-            if(isset($GLOBALS["fields"][$srg])) {
-                return;
-            }
-            echo("Invalide srg!");
-            exit(403);
-        }
-
-        function load($pth) {
-            $map = array();
-            $file = fopen($srg, "r");
-            while(($line = fgets($file)) !== false){
-                $arr = explode(",", $line);
-                $map[$arr[0]] = (int)$arr[1];
-            }
-            asort($map);
-            return $map;            
-        }
-
         if(isset($_GET) && count($_GET) > 0) {
             if(isset($_GET["srg"])){
                 $srg = $_GET["srg"];
                 checkValidSrg($srg);
-                $path = $srg . ".csv";
+                $path = "suggestions/" . $srg . ".csv";
+                $map = load($path);
                 if(isset($_GET["add"])){
-                    $file = fopen($srg, "a");
-                    while(($line = fgets($file)) !== false){
-                        $arr = explode(",", $line);
-                        $map[$arr[0]] = $arr[1];
-                    }            
-                    fwrite($file, $_GET["add"] . ", 1");
+                    if(!isset($map[$_GET["add"]])){
+                        $file = fopen($path, "a");
+                        fwrite($file, $_GET["add"] . ", 1\r\n");
+                    }
                 }
                 $file = false;
                 if(file_exists($path)) {
-                    $map = load($path);
                     if(count($map) <= 0) {
                         return NULL;
                     }
                     echo "<table>";
-                    foreach($map as $srg => $votes){
-                        echo "<tr><td>" . $srg . "</td><td>" . $votes . "</td>";
+                    foreach($map as $name => $votes){
+                        echo "<tr><td>" . $name . "</td><td>" . $votes . "</td>";
                     }
                     echo "</table>";
                 }
