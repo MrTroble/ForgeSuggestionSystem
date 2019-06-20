@@ -24,6 +24,7 @@ function checkCookie(){
     $file = fopen("token.txt", "r");
     while(($line = fgets($file)) !== false){
         $arr = explode(",", $line);
+        echo $line;
         if($token === $arr[0]){
             if(time() > (int)$arr[1]){
                 return true;
