@@ -12,6 +12,10 @@
         <?php 
         include 'lib.php';
         
+        if (!file_exists("./suggestions/")){
+            mkdir("./suggestions/");
+        }
+
         if(isset($_GET) && count($_GET) > 0) {
             if(isset($_GET["srg"])){
                 $srg = $_GET["srg"];
