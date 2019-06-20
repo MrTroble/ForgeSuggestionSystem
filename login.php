@@ -19,8 +19,10 @@ curl_close($curl);
 
 if($rnt !== false){
     $token = str_replace("access_token=", "", explode("&", $rnt)[0]);
-    $exp = mktime();
+    $exp = time() + 60 * 60 * 24;
     setcookie("token", $token, $exp);
+    echo $token;
+    echo $exp;
     $tokens = fopen("token.txt", "a");
     fwrite("$token, $exp\n");
     fclose($tokens);
