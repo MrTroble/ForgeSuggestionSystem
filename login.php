@@ -2,11 +2,10 @@
 if(isset($_GET) && isset($_GET["logout"])){
     unset($_COOKIE['token']);
     setcookie('token', null, -1, '/');
+} else if(!isset($_GET) || !isset($_GET["code"])){
+    header("Location: https://github.com/login/oauth/authorize?client_id=68f267e2a51c384bff92");
+    die();
 } else {
-    if(!isset($_GET) || !isset($_GET["code"])){
-        header("Location: https://github.com/login/oauth/authorize?client_id=68f267e2a51c384bff92");
-        die();
-    }
     $code = $_GET["code"];
     $file = fopen("creds.txt", "r");
     $secret = fgets($file);
