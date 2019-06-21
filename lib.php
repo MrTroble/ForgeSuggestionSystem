@@ -46,6 +46,7 @@ function getUsername($token) {
 
     curl_setopt($curl, CURLOPT_URL, "https://api.github.com/user");
     curl_setopt($curl, CURLOPT_HTTPHEADER, "Authorization: token $token");
+    curl_setopt($curl, CURLOPT_USERAGENT, "FSS");
 
     $rtn = curl_exec($curl);
     $rsp = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
