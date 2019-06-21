@@ -125,6 +125,9 @@ function load($pth) {
     $file = fopen($pth, "r");
     while(($line = fgets($file)) !== false){
         $arr = explode(",", $line);
+        if(count($arr)) {
+            continue;
+        }
         $map[$arr[0]] = (int)$arr[1];
     }
     asort($map);
