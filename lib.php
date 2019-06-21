@@ -147,6 +147,7 @@ function write($pth, $map){
         }
         fwrite($file, "\n");
     }
+    flush($file);
     fclose($file);
 }
 
