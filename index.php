@@ -20,9 +20,11 @@
         if(isset($_GET) && count($_GET) > 0) {
             if(isset($_GET["srg"])){
                 $srg = $_GET["srg"];
-                if(checkValidSrg($srg)) {
+                if(($list = checkValidSrg($srg)) !== false) {
                     $path = "suggestions/" . $srg . ".csv";
                     $map = load($path);
+                    echo("<h1>" . $list[$srg] . "</h1>");
+                    echo("<h2>$srg</h2>");
                     if(isset($_GET["add"])){
                         if(checkCookie()){
                             if(!isset($map[$_GET["add"]])){
