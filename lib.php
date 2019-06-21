@@ -55,8 +55,7 @@ function getUsername($token) {
         echo "<p>Error $rsp !</p>";
         return false;
     }
-    $reg1 = explode("\"login\"", $rtn)[1];
-    $reg2 = explode("\"", $rtn)[1];
+    $reg2 = explode("\"", $rtn)[3];
     return $reg2;
 }
 
