@@ -136,7 +136,6 @@ function load($pth) {
 
 function write($pth, $map){
     $file = fopen($pth, "w");
-    var_dump($map);
     foreach ($map as $key => $value) {
         fwrite($key);
         if(is_array($value)){
