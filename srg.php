@@ -20,6 +20,9 @@
         <?php 
         include 'lib.php';
         
+        error_reporting(E_ALL);
+        ini_set("display_errors", 1);
+
         if(isset($_GET) && count($_GET) > 0) {
             if(isset($_GET["srg"])){
                 $srg = $_GET["srg"];
