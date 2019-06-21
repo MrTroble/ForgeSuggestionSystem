@@ -43,10 +43,11 @@ function checkCookie(){
 
 function getUsername($token) {
     $curl = curl_init();
-    echo $token;
+
     curl_setopt($curl, CURLOPT_URL, "https://api.github.com/user");
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: token $token"));
     curl_setopt($curl, CURLOPT_USERAGENT, "FSS");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     $rtn = curl_exec($curl);
     $rsp = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
@@ -54,8 +55,8 @@ function getUsername($token) {
         echo "<p>Error $rsp !</p>";
         return false;
     }
-    $reg1 = explode("\"login\": \"", $rtn)[1];
-    $reg2 = explode("\"", $rtn)[0];
+    $reg1 = explode("\"login\"", $rtn)[1];
+    $reg2 = explode("\"", $rtn)[1];
     return $reg2;
 }
 
