@@ -36,7 +36,7 @@
                                 if(!isset($map[$_GET["add"]])){
                                     $map[$_GET["add"]] = array($user);
                                     write($path, $map);
-                                    header("Location: srg.php?srg=$srg");
+                                    #header("Location: srg.php?srg=$srg");
                                 } else {
                                     echo "<p>Already defined!</p>";
                                 }
