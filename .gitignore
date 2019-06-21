@@ -1,5 +1,7 @@
 /suggestions/
 /update/
 cache.html
+.creds.txt
+.token.txt
 creds.txt
 token.txt

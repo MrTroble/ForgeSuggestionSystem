@@ -45,15 +45,21 @@ function checkCookie(){
 function display($map) {
     $string = "<table>";
     foreach($map as $srg => $name) {
-        $string = $string . "<tr><td>" . $srg . "</td><td><a href='index.php?srg=" . $srg . "'>" . $name . "</a></td>\n\r";
+        $string = $string . "<tr><td>" . $srg . "</td><td><a href='srg.php?srg=" . $srg . "'>" . $name . "</a></td>\n\r";
     }
     return $string . "</table>";
 }
 
 function loadAll(){
-$GLOBALS["methods"] = readAndPack("methods.csv");
-$GLOBALS["params"] = readAndPack("params.csv");
-$GLOBALS["fields"] = readAndPack("fields.csv");
+    if(!isset($GLOBALS["methods"])){
+        $GLOBALS["methods"] = readAndPack("methods.csv");
+    }
+    if(!isset($GLOBALS["params"])){
+        $GLOBALS["params"] = readAndPack("params.csv");
+    }
+    if(!isset($GLOBALS["fields"])){
+        $GLOBALS["fields"] = readAndPack("fields.csv");
+    }
 }
 
  // Checking for the srg value for not being mallissios
@@ -105,6 +111,19 @@ function load($pth) {
     }
     asort($map);
     return $map;            
+}
+
+function write($pth, $map){
+    $file = fopen($pth, "w");
+    fwrite($map[0]);
+    if(is_array($map[1])){
+        for ($i=0; $i < count($map[1]); $i++) { 
+            fwrite("," . $map[1][$i]);
+        }
+    } else {
+        fwrite($map[1]);
+    }
+    fwrite("\n");
 }
 
 ?>
