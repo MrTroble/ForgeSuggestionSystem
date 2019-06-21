@@ -20,6 +20,7 @@ if(isset($_GET) && isset($_GET["logout"])){
     $rtn = curl_exec($curl);
     $rsp = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
     if($rtn === false || $rsp >= 400){
+        echo "<p>Error $rsp !</p>";
         die();
     }
     $rtn = explode("=", $rtn)[1];
@@ -49,7 +50,7 @@ if(isset($_GET) && isset($_GET["logout"])){
             <a href="./index.php">Home</a>
             <a href="./cache.html">List</a>
             <?php 
-            if(isset($_COOKIE["token"])){
+            if(isset($_COOKIE["token"]) || isset($_GET["code"])){
                 echo "<a href='./login.php?logout=true'>Logout</a>";
             } else {
                 echo "<a href='./login.php'>Login</a>";
