@@ -29,6 +29,7 @@
                     }            
                     $path = "suggestions/" . $srg . ".csv";
                     $map = load($path);
+                    var_dump($map);
                     echo("<h2>" . $list[$srg] . " - $srg</h2>");
                     if(isset($_GET["add"])){
                         if(($accesstoken = checkCookie()) !== false){
