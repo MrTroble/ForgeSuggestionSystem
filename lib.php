@@ -21,12 +21,14 @@ function checkCookie(){
     if(!isset($token)) {
         return false;
     }
+    $file = fopen("creds.txt", "r");
+    $secret = fgets($file);
+    fclose($file);
     $file = fopen("token.txt", "r");
-    echo "Check";
     while(($line = fgets($file)) !== false){
         $arr = explode(",", $line);
-        echo $line;
-        if($token === $arr[0]){
+        $cmp = hash_hmac("sha1", $arr[0], $secret);
+        if(hash_equals($token, $cmp)){
             if(time() > (int)$arr[1]){
                 return true;
             } else {
@@ -35,6 +37,7 @@ function checkCookie(){
             }
         }
     }
+    fclose($file);
     return false;
 }
 
