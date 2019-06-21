@@ -7,7 +7,7 @@ if(isset($_GET) && isset($_GET["logout"])){
     die();
 } else {
     $code = $_GET["code"];
-    $file = fopen("creds.txt", "r");
+    $file = fopen(".creds.txt", "r");
     $secret = fgets($file);
     fclose($file);
     $curl = curl_init();
@@ -32,7 +32,7 @@ if(isset($_GET) && isset($_GET["logout"])){
     $exp = time() + (60 * 60 * 24);
     setcookie("token", $hmc, $exp);
 
-    $tokens = fopen("token.txt", "a");
+    $tokens = fopen(".token.txt", "a");
     fwrite($tokens, "$token,$exp\n");
     fflush($tokens);
     fclose($tokens);
