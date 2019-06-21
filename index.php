@@ -10,7 +10,7 @@
             <a href="./cache.html">List</a>
             <?php 
             if(isset($_COOKIE["token"])){
-                echo "<p>You are logged in</p>";
+                echo "<a>You are logged in</a>";
             } else {
                 echo "<a href='./login.php'>Login</a>";
             }
