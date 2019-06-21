@@ -29,10 +29,12 @@ function checkCookie(){
         $arr = explode(",", $line);
         $cmp = hash_hmac("sha1", $arr[0], $secret);
         if(hash_equals($token, $cmp)){
+            var_dump((int)$arr[1]);
+            var_dump(time());
             if(time() > (int)$arr[1]){
                 return true;
             } else {
-                echo "Timestemp expired!";
+                echo "<p>Timestemp expired!</p>";
                 return false;
             }
         }
