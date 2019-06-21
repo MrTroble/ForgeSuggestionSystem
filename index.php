@@ -7,7 +7,14 @@
         <h1>Suggestion System</h1>
         <div class="menu">
             <a href="./index.php">Home</a>
-            <a href="./login.php">Login</a>
+            <a href="./cache.php">List</a>
+            <?php 
+             if(checkCookie()){
+                echo "<a href='./login.php'>Renew login</a>";
+             } else {
+                echo "<a href='./login.php'>Login</a>";
+             }
+             ?>
         </div>
         <div class="container">
         <?php 
@@ -50,8 +57,10 @@
                         }
                         echo "</table>";
                     }
+                    echo "<form method='get'><input type='hidden' name='srg' value='" . $srg . "'><input type='text' name='add'><input type='submit' value='Add'></form>";
+                } else {
+                    echo "<p>Error not a valid SRG!</p>";
                 }
-                echo "<form method='get'><input type='hidden' name='srg' value='" . $srg . "'><input type='text' name='add'><input type='submit' value='Add'></form>";
             } else if(isset($_GET["search"])){
                 $name = $_GET["search"];
                 echo "<table>";
