@@ -137,17 +137,17 @@ function load($pth) {
 function write($pth, $map){
     $file = fopen($pth, "w");
     foreach ($map as $key => $value) {
-        fwrite($key);
+        fwrite($file, $key);
         if(is_array($value)){
             for ($i=0; $i < count($value); $i++) { 
-                fwrite("," . $value[$i]);
+                fwrite($file, "," . $value[$i]);
             }
         } else {
-            fwrite($value);
+            fwrite($file, $value);
         }
-        fwrite("\n");
+        fwrite($file, "\n");
     }
-    fclose($pth);
+    fclose($file);
 }
 
 ?>
