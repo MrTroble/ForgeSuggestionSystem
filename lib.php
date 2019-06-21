@@ -32,7 +32,7 @@ function checkCookie(){
             if(time() < (int)$arr[1]){
                 return true;
             } else {
-                echo "<p>Timestemp expired!</p>";
+                echo "<p>Timestemp expired! Please relogin!</p>";
                 return false;
             }
         }
