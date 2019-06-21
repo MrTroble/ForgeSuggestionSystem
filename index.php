@@ -8,13 +8,7 @@
         <div class="menu">
             <a href="./index.php">Home</a>
             <a href="./cache.php">List</a>
-            <?php 
-             if(checkCookie()){
-                echo "<a href='./login.php'>Renew login</a>";
-             } else {
-                echo "<a href='./login.php'>Login</a>";
-             }
-             ?>
+            <a href='./login.php'>Login</a>
         </div>
         <div class="container">
         <?php 
