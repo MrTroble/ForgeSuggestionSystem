@@ -2,7 +2,7 @@
 if(isset($_GET) && isset($_GET["logout"])){
     unset($_COOKIE['token']);
     setcookie('token', null, -1, '/');
-} else if(!isset($_GET) || !isset($_GET["code"])){
+} else if(!isset($_GET["code"])){
     header("Location: https://github.com/login/oauth/authorize?client_id=68f267e2a51c384bff92");
     die();
 } else {
@@ -50,7 +50,7 @@ if(isset($_GET) && isset($_GET["logout"])){
             <a href="./cache.html">List</a>
             <?php 
             if(isset($_COOKIE["token"])){
-                echo "<a>You are logged in</a>";
+                echo "<a href='./login.php?logout=true'>Logout</a>";
             } else {
                 echo "<a href='./login.php'>Login</a>";
             }
