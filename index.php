@@ -8,10 +8,11 @@
         <div class="menu">
             <a href="./index.php">Home</a>
             <a href="./cache.html">List</a>
-            <a href="./login.php">Login</a>
             <?php 
-            if(checkCookie()){
+            if(isset($_COOKIE["token"])){
                 echo "<p>You are logged in</p>";
+            } else {
+                echo "<a href='./login.php'>Login</a>";
             }
             ?>
         </div>
