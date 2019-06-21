@@ -24,8 +24,8 @@ $token = explode("&", $rtn)[0];
 
 curl_close($curl);
 
-$exp = time() + 60 * 60 * 24;
 $hmc = hash_hmac("sha1", (string)$token, $secret);
+$exp = time() + (60 * 60 * 24);
 setcookie("token", $hmc, $exp);
 
 $tokens = fopen("token.txt", "a");
