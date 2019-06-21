@@ -133,15 +133,18 @@ function load($pth) {
 
 function write($pth, $map){
     $file = fopen($pth, "w");
-    fwrite($map[0]);
-    if(is_array($map[1])){
-        for ($i=0; $i < count($map[1]); $i++) { 
-            fwrite("," . $map[1][$i]);
+    foreach ($map as $key => $value) {
+        fwrite($key);
+        if(is_array($value)){
+            for ($i=0; $i < count($value); $i++) { 
+                fwrite("," . $value[$i]);
+            }
+        } else {
+            fwrite($value);
         }
-    } else {
-        fwrite($map[1]);
+        fwrite("\n");
     }
-    fwrite("\n");
+    fclose($pth);
 }
 
 ?>
