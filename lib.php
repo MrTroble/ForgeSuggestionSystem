@@ -45,7 +45,7 @@ function checkCookie(){
 function display($map) {
     $string = "<table>";
     foreach($map as $srg => $name) {
-        $string = $string . "<tr><td>" . $srg . "</td><td><a href=\"?srg=" . $srg . "\" target=''>" . $name . "</a></td>\n\r";
+        $string = $string . "<tr><td>" . $srg . "</td><td><a href='index.php?srg=" . $srg . "'>" . $name . "</a></td>\n\r";
     }
     return $string . "</table>";
 }
