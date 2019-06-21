@@ -29,6 +29,7 @@
                                 $file = fopen($path, "a");
                                 fwrite($file, $_GET["add"] . ", 1\r\n");
                                 fclose($file);
+                                header("Location: index.php?srg=$srg");
                             }
                         } else {
                             echo "Error! Not logged in!";
