@@ -32,6 +32,28 @@ $tokens = fopen("token.txt", "a");
 fwrite($tokens, "$token,$exp\n");
 fflush($tokens);
 fclose($tokens);
-
-echo "<h1>DONE! <a href='index.php'>Go back</a></h1>";
 ?>
+
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>Suggestion System</title>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <div class="menu">
+            <a href="./index.php">Home</a>
+            <a href="./cache.html">List</a>
+            <?php 
+            if(isset($_COOKIE["token"])){
+                echo "<a>You are logged in</a>";
+            } else {
+                echo "<a href='./login.php'>Login</a>";
+            }
+            ?>
+        </div>
+        <div class="container">
+        <p>Done!</p>
+        </div>
+    </body>
+</html>
