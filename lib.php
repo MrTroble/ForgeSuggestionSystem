@@ -30,7 +30,7 @@ function checkCookie(){
         $cmp = hash_hmac("sha1", $arr[0], $secret);
         if(hash_equals($token, $cmp)){
             if(time() < (int)$arr[1]){
-                return $line;
+                return $arr[0];
             } else {
                 echo "<p>Timestemp expired! Please relogin!</p>";
                 return false;
