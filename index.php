@@ -7,7 +7,7 @@
         <h1>Suggestion System</h1>
         <div class="menu">
             <a href="./index.php">Home</a>
-            <a href="./cache.php">List</a>
+            <a href="./cache.html">List</a>
             <a href='./login.php'>Login</a>
         </div>
         <div class="container">
