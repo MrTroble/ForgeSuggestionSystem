@@ -130,6 +130,7 @@ function load($pth) {
         }
         $map[$arr[0]] = (int)$arr[1];
     }
+    fclose($file);
     asort($map);
     return $map;            
 }
@@ -147,7 +148,7 @@ function write($pth, $map){
         }
         fwrite($file, "\n");
     }
-    flush($file);
+    fflush($file);
     fclose($file);
 }
 
