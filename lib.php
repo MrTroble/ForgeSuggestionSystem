@@ -44,7 +44,7 @@ function checkCookie(){
 function getUsername($token) {
     $curl = curl_init();
 
-    curl_setopt($curl, CURLOPT_URL, "https://github.com/login/oauth/access_token");
+    curl_setopt($curl, CURLOPT_URL, "https://api.github.com/user");
     curl_setopt($curl, CURLOPT_HTTPHEADER, "Authorization: token $token");
 
     $rtn = curl_exec($curl);
