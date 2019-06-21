@@ -31,14 +31,17 @@
                     $map = load($path);
                     echo("<h2>" . $list[$srg] . " - $srg</h2>");
                     if(isset($_GET["add"])){
-                        if(checkCookie()){
-                            if(!isset($map[$_GET["add"]])){
-                                $file = fopen($path, "a");
-                                fwrite($file, $_GET["add"] . ", 1\r\n");
-                                fclose($file);
-                                header("Location: srg.php?srg=$srg");
+                        if(($accesstoken = checkCookie()) !== false){
+                            if(($user = getUsername($accesstoken)) !== false) {
+                                if(!isset($map[$_GET["add"]])){
+                                    $map[$_GET["add"]] = array($user);
+                                    write($path, $map);
+                                    header("Location: srg.php?srg=$srg");
+                                } else {
+                                    echo "<p>Already defined!</p>";
+                                }
                             } else {
-                                echo "<p>Already defined!</p>";
+                                echo "<p>Error! Access token revoked? Git down? (Could not get username)</p>";
                             }
                         } else {
                             echo "<p>Error! Not logged in!</p>";

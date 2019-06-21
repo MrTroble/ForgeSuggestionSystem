@@ -30,7 +30,7 @@ function checkCookie(){
         $cmp = hash_hmac("sha1", $arr[0], $secret);
         if(hash_equals($token, $cmp)){
             if(time() < (int)$arr[1]){
-                return true;
+                return $line;
             } else {
                 echo "<p>Timestemp expired! Please relogin!</p>";
                 return false;
@@ -41,11 +41,28 @@ function checkCookie(){
     return false;
 }
 
+function getUsername($token) {
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "https://github.com/login/oauth/access_token");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, "Authorization: token $token");
+
+    $rtn = curl_exec($curl);
+    $rsp = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+    if($rtn === false || $rsp >= 400){
+        echo "<p>Error $rsp !</p>";
+        return false;
+    }
+    $reg1 = explode("\"login\": \"", $rtn)[1];
+    $reg2 = explode("\"", $rtn)[0];
+    return $reg2;
+}
+
 // Displays table
 function display($map) {
     $string = "<table>";
     foreach($map as $srg => $name) {
-        $string = $string . "<tr><td>" . $srg . "</td><td><a href='srg.php?srg=" . $srg . "'>" . $name . "</a></td>\n\r";
+        $string = $string . "<tr><td>$srg</td><td><a href='srg.php?srg=$srg'>$name</a></td>\n\r";
     }
     return $string . "</table>";
 }
@@ -66,7 +83,7 @@ function loadAll(){
  function checkValidSrg($srg) {
     loadAll();
     if(isset($GLOBALS["methods"][$srg])) {
-        return  $GLOBALS["methods"];
+        return $GLOBALS["methods"];
     }
     if(isset($GLOBALS["params"][$srg])) {
         return $GLOBALS["params"];
