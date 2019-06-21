@@ -8,7 +8,12 @@
         <div class="menu">
             <a href="./index.php">Home</a>
             <a href="./cache.html">List</a>
-            <a href='./login.php'>Login</a>
+            <a href="./login.php">Login</a>
+            <?php 
+            if(checkCookie()){
+                echo "<p>You are logged in</p>";
+            }
+            ?>
         </div>
         <div class="container">
         <?php 
